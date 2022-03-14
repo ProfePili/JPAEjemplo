@@ -5,6 +5,7 @@
  */
 package jpaejemplo;
 
+import java.util.List;
 import java.util.Scanner;
 import jpaejemplo.entidades.Usuario;
 import jpaejemplo.servicios.UsuarioServicio;
@@ -20,7 +21,8 @@ public class JPAEjemplo {
      */
     public static void main(String[] args) throws Exception {
         crearUsuario();
-        System.out.println(buscarUsuario());
+        System.out.println(buscarUsuarioPorEmail());
+        System.out.println(buscarUsuariosPorRangoDeEdad());
 
     }
 
@@ -48,7 +50,7 @@ public class JPAEjemplo {
         }
     }
 
-    public static Usuario buscarUsuario() throws Exception {
+    public static Usuario buscarUsuarioPorEmail() throws Exception {
         try {
             Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
@@ -60,6 +62,23 @@ public class JPAEjemplo {
         } catch (Exception e) {
             throw new Exception("error");
         }
+    }
+    
+    public static List<Usuario> buscarUsuariosPorRangoDeEdad() throws Exception {
+        try {
+            Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
+            System.out.println("Ingrese la edad menor que puede tener el usuario que desea buscar:");
+            int edadMenor = scanner.nextInt();
+            
+            System.out.println("Ingrese la edad mayor que puede tener el usuario que desea buscar:");
+            int edadMayor = scanner.nextInt();
+
+            UsuarioServicio usuarioServicio = new UsuarioServicio();
+            return usuarioServicio.buscarUsuarioPorRangoDeEdad(edadMenor, edadMayor);
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new Exception("ERROR");
+        }
     }
 }

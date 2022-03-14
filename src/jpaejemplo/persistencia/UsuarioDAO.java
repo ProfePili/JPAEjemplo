@@ -2,6 +2,7 @@
 
 package jpaejemplo.persistencia;
 
+import java.util.List;
 import jpaejemplo.entidades.Usuario;
 
 
@@ -18,10 +19,11 @@ public class UsuarioDAO extends DAO<Usuario>{
         return usuario;
     }
     
-    public Usuario buscarUsuarioPorRangoEdad(int edadMenor, int edadMayor){
+    public List<Usuario> buscarUsuarioPorRangoEdad(int edadMenor, int edadMayor){
         conectar();
-        Usuario usuario = (Usuario) em.createQuery("SELECT u FROM Usuario u WHERE u.edad BETWEEN :edad1 AND :edad2").setParameter("edad1", edadMenor).setParameter("edadMayor", edadMayor);
+        List<Usuario> usuarios = em.createQuery("SELECT u FROM Usuario u WHERE u.edad BETWEEN :edad1 AND :edad2")
+                .setParameter("edad1", edadMenor).setParameter("edad2", edadMayor).getResultList();
         desconectar();
-        return usuario;
+        return usuarios;
     }
 }

@@ -2,6 +2,7 @@
 
 package jpaejemplo.servicios;
 
+import java.util.List;
 import jpaejemplo.entidades.Usuario;
 import jpaejemplo.persistencia.UsuarioDAO;
 
@@ -31,14 +32,14 @@ public class UsuarioServicio {
                 throw new Exception("DEBE INGRESAR UN APELLIDO");
             }
 
-            if (edad == null | edad < 18) {
+            if (Integer.toString(edad) == null | edad < 18 | Integer.toString(edad).trim().isEmpty()) {
                 throw new Exception("DEBE SER MAYOR DE EDAD");
             }
 
-           // CREO UNA INSTANCIA DE USUARIO
+            // CREO UNA INSTANCIA DE USUARIO
             Usuario usuario = new Usuario();
 
-            //SETEO LOS VALORES
+            // SETEO LOS VALORES
             usuario.setEmail(email);
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
@@ -53,10 +54,24 @@ public class UsuarioServicio {
     }
     
     public Usuario buscarUsuarioPorEmail(String email) throws Exception{
+        // VALIDACIONES
         if(email == null || email.trim().isEmpty()){
             throw new Exception("EMAIL NO VÁLIDO");
         }
                 
         return usuarioDAO.buscarUsuarioPorEmail(email);
+    }
+    
+    public List<Usuario> buscarUsuarioPorRangoDeEdad(int edad1, int edad2) throws Exception{
+        // VALIDACIONES
+        if(Integer.toString(edad1) == null || Integer.toString(edad1).trim().isEmpty()){
+            throw new Exception("EDAD NO VÁLIDA");
+        }
+        
+        if(Integer.toString(edad2) == null || Integer.toString(edad2).trim().isEmpty()){
+            throw new Exception("EDAD NO VÁLIDA");
+        }
+        
+        return usuarioDAO.buscarUsuarioPorRangoEdad(edad1, edad2);
     }
 }
