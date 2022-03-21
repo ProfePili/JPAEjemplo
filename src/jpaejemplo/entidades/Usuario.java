@@ -1,13 +1,17 @@
 package jpaejemplo.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+//Este metadato nos permite crear  una tabla Usuario en nuestra DB
 @Entity
 public class Usuario {
 
+    //METADATO QUE INDICA QUÉ ATRIBUTO ES LLAVE PRIMARIA DE LA TABLA
     @Id
     private String email;
+    @Column(unique = true)
     private String nombre;
     private String apellido;
     private Integer edad;

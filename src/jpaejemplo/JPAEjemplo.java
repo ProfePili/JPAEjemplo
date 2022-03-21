@@ -20,12 +20,15 @@ public class JPAEjemplo {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
+        // Llamados a métodos sstaticos que 
+        // están definidos en la misma clase        
         crearUsuario();
         System.out.println(buscarUsuarioPorEmail());
         System.out.println(buscarUsuariosPorRangoDeEdad());
 
     }
 
+    // METODO DE LECTURA DE DATOS PARA CREAR UN USUARIO
     public static void crearUsuario() throws Exception {
 
         try {
@@ -50,6 +53,7 @@ public class JPAEjemplo {
         }
     }
 
+    // METODO DE LECTURA DE DATOS PARA INGRESAR UN EMAIL
     public static Usuario buscarUsuarioPorEmail() throws Exception {
         try {
             Scanner scanner = new Scanner(System.in).useDelimiter("\n");
@@ -64,6 +68,7 @@ public class JPAEjemplo {
         }
     }
     
+    // MÉTODO LECTURA DE DATOS
     public static List<Usuario> buscarUsuariosPorRangoDeEdad() throws Exception {
         try {
             Scanner scanner = new Scanner(System.in).useDelimiter("\n");

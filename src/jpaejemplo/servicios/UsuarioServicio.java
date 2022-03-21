@@ -9,13 +9,15 @@ import jpaejemplo.persistencia.UsuarioDAO;
 
 public class UsuarioServicio {
 
+    //USO UN ATRIBUTO UsuarioDAO PORQUE LO EMPLEO EN TODOS MIS MÉTODOS
     private UsuarioDAO usuarioDAO;
 
+    // SI O SI DEBO INICIALIZARLO EN MI CONSTRUCTOR VACÍO
     public UsuarioServicio() {
         this.usuarioDAO = new UsuarioDAO();
     }
     
-    
+    // METODO PARA VALIDAR LOS DATOS PEDIDOS Y SETEAR UN OBJETO USUARIO
     public void crearUsuario(String email, String nombre, String apellido, Integer edad) throws Exception {
         
         try {
@@ -53,17 +55,23 @@ public class UsuarioServicio {
         }
     }
     
+    // METODO QUE VALIDA MAIL Y LO PASA POR PARÁMETRO AL MÉTODO
+    // BUSCAR POR EMAIL QUE EJECUTARA UNA QUERY JPQL CON ESE DATO(email)
     public Usuario buscarUsuarioPorEmail(String email) throws Exception{
         // VALIDACIONES
         if(email == null || email.trim().isEmpty()){
             throw new Exception("EMAIL NO VÁLIDO");
         }
-                
+        
+        // retorna el resultado de la query que encontramos en el 
+        // método de usuarioDAO
         return usuarioDAO.buscarUsuarioPorEmail(email);
     }
     
+    // METODO QUE VALIDA DOS DATOS NUMÉRICOS
+    // Y PUEDE RETORNAR MÁS DE UN REGISTRO
     public List<Usuario> buscarUsuarioPorRangoDeEdad(int edad1, int edad2) throws Exception{
-        // VALIDACIONES
+        // VALIDACIONES NUMÉRICAS
         if(Integer.toString(edad1) == null || Integer.toString(edad1).trim().isEmpty()){
             throw new Exception("EDAD NO VÁLIDA");
         }
